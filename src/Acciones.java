@@ -12,6 +12,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Acciones extends JDialog {
 
@@ -40,6 +42,11 @@ public class Acciones extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		JButton btnInsertarAlumno = new JButton("Insertar alumno");
+		btnInsertarAlumno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				abrirVentanaInsertarAlumno();
+			}
+		});
 		JButton btnBorrarAlumno = new JButton("Borrar alumno");
 		JButton btnMediaDeEdad = new JButton("Media de edad");
 		
@@ -82,7 +89,13 @@ public class Acciones extends JDialog {
 		contentPanel.setLayout(gl_contentPanel);
 	}
 	
+	private void abrirVentanaInsertarAlumno() {
+		InsertarAlumno insertarAlumno = new InsertarAlumno(this,true);
+		insertarAlumno.setVisible(true);
+		dispose();
+		
+	}
 	public void aniadirAlumno (Alumno alumno){
-		this.comboBoxAlumnos.addItem(alumno.getNombre() + " " + alumno.getApellido() + " - " + alumno.getEdad());
+		this.comboBoxAlumnos.addItem(alumno.getNombre() + " " + alumno.getApellido() + " - Edad: " + alumno.getEdad());
 	}
 }
